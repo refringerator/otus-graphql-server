@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
+
 module.exports = {
   apps: [
     {
@@ -12,12 +15,13 @@ module.exports = {
         MODE: 'test',
       },
       env_stage: {
-        PORT: '4007',
+        PORT: '80',
         MODE: 'production',
       },
       env_production: {
-        PORT: '4007',
+        PORT: process.env.PORT,
         MODE: 'production',
+        MONGO_CONNECTION_STRING: process.env.MONGO_CONNECTION_STRING,
       },
     },
   ],
