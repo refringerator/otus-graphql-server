@@ -12,11 +12,11 @@ module.exports = {
         MODE: 'test',
       },
       env_stage: {
-        PORT: '80',
+        PORT: '4007',
         MODE: 'production',
       },
       env_production: {
-        PORT: '80',
+        PORT: '4007',
         MODE: 'production',
       },
     },
