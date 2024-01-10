@@ -9,6 +9,7 @@ export const prepareCategory = async (item: CategoryDocument): Promise<Category>
         photo: item.photo,
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
+        value: item.value,
       }
     : null;
 

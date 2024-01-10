@@ -15,7 +15,7 @@ export const getMany: ApolloResolver<
   const { name, ids, sorting, pagination, createdAt, updatedAt } = args.input || {};
   const query = CategoryModel.find();
   if (commandId) {
-    query.where('commandId', commandId);
+    // query.where('commandId', commandId);
   }
   if (createdAt && (createdAt.gte || createdAt.lte)) {
     query.where('createdAt');

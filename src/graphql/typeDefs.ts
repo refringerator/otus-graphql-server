@@ -55,7 +55,7 @@ export const typeDefs = `#graphql
   input SignUpBody {
     email: String!
     password: String!
-    commandId: String!
+    # commandId: String!
   }
   
   input SignInBody {
@@ -91,12 +91,14 @@ export const typeDefs = `#graphql
   type Category {
     id: ID!
     name: String!
+    value: String!
     photo: String
     createdAt: Date!
     updatedAt: Date!
   }
   
   input CategoryAddInput {
+    value: String! 
     name: String!
     photo: String
   }

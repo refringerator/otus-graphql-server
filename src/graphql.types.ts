@@ -34,11 +34,13 @@ export type Category = {
   name: Scalars['String']['output'];
   photo?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['Date']['output'];
+  value: Scalars['String']['output'];
 };
 
 export type CategoryAddInput = {
   name: Scalars['String']['input'];
   photo?: InputMaybe<Scalars['String']['input']>;
+  value: Scalars['String']['input'];
 };
 
 export type CategoryGetManyInput = {
@@ -521,7 +523,6 @@ export type SignInBody = {
 };
 
 export type SignUpBody = {
-  commandId: Scalars['String']['input'];
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };

@@ -15,7 +15,7 @@ export const getMany: ApolloResolver<never, ResponseManyResult<Product[]> | Erro
   const { name, ids, sorting, pagination, updatedAt, createdAt } = args.input || {};
   const query = ProductModel.find();
   if (commandId) {
-    query.where('commandId', commandId);
+    // query.where('commandId', commandId);
   }
   if (createdAt && (createdAt.gte || createdAt.lte)) {
     query.where('createdAt');

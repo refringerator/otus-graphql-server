@@ -10,7 +10,7 @@ export const getOne: ApolloResolver<never, Product | Error, ProductQueriesGetOne
   const { id } = args;
   const query = ProductModel.findOne({ _id: id });
   if (commandId) {
-    query.where('commandId', commandId);
+    // query.where('commandId', commandId);
   }
   const entity = await query;
 

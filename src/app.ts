@@ -16,7 +16,7 @@ import * as path from 'path';
 
   const isDev = process.env.MODE !== 'production';
 
-  await mongoose.connect(isDev ? config.db_dev : config.db);
+  await mongoose.connect(isDev ? config.db_dev : config.db, { autoIndex: true });
   Object.assign(mongoose, { Promise: global.Promise });
 
   const port = parseInt(process.env.PORT) || 4007;
