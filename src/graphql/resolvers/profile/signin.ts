@@ -14,7 +14,7 @@ export const signin: ApolloResolver<never, ProfileMutations['signin'] | Error, P
     return new GraphQLError('User not found or invalid password', {
       extensions: {
         code: ErrorCode.INCORRECT_EMAIL_OR_PASSWORD,
-        http: { status: 400 },
+        // http: { status: 200 },
       },
     });
   }
