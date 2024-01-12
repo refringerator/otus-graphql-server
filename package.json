@@ -13,7 +13,7 @@
     "dev:server": "cross-env PORT=80 MODE=production node build/app.js",
     "stop": "pm2 stop app",
     "start:stage": "pm2 start ecosystem.config.js --env stage",
-    "start": "pm2 start ecosystem.config.js --env production",
+    "start": "tsc --project tsconfig.json && pm2 start ecosystem.config.js --env production",
     "restart": "yarn stop && yarn start",
     "schemagen": "graphql-codegen && ts-node enhance.graphql.types.ts",
     "db:start": "brew services start mongodb-community@5.0",
