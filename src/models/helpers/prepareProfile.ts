@@ -7,8 +7,13 @@ export const prepareProfile = (item: UserDocument): Profile => {
   const raw = item.toObject();
   return {
     id: raw._id.toString(),
-    name: raw.name,
+    firstName: raw.firstName,
+    lastName: raw.lastName,
     email: raw.email,
+    phone: raw.phone,
     signUpDate: raw.signUpDate,
+    age: raw.age,
+    gender: raw.gender,
+    role: raw.role,
   };
 };

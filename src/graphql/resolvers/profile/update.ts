@@ -10,8 +10,12 @@ export const updateRaw: ApolloResolver<
   ProfileMutationsUpdateArgs
 > = async (_, { input }, { user }) => {
   try {
-    const { name } = input;
-    user.name = name;
+    // const { name } = input;
+    const { firstName, lastName, age, gender } = input;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.age = age;
+    user.gender = gender;
 
     // Выполняем валидацию перед сохранением
     const validationError = user.validateSync();

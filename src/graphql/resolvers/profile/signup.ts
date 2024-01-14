@@ -1,5 +1,5 @@
 import { ErrorCode, ApolloResolver } from '../../../types';
-import { ProfileMutations, ProfileMutationsSignupArgs } from '../../../graphql.types';
+import { ProfileMutations, ProfileMutationsSignupArgs, RoleType } from '../../../graphql.types';
 import { UserDocument, UserModel } from '../../../models/User';
 import { getTokenByParams } from '../../../utils/helpers';
 import { GraphQLError } from 'graphql/index';
@@ -8,7 +8,7 @@ export const signup: ApolloResolver<never, ProfileMutations['signup'] | Error, P
   _,
   args
 ) => {
-  const { password, email, commandId } = args;
+  const { password, email, phone } = args;
 
   const foundUsers = (await UserModel.findOne({ email })) as UserDocument;
   if (foundUsers) {
@@ -21,7 +21,9 @@ export const signup: ApolloResolver<never, ProfileMutations['signup'] | Error, P
   }
   const user = new UserModel() as UserDocument;
   user.email = email;
-  user.commandId = commandId;
+  user.phone = phone;
+  user.commandId = 'cakeshop';
+  user.role = email.toLowerCase().endsWith('@cake.shop') ? RoleType.Admin : RoleType.User;
   user.password = await user.generateHash(password);
 
   const validationError = user.validateSync();

@@ -55,7 +55,7 @@ export const typeDefs = `#graphql
   input SignUpBody {
     email: String!
     password: String!
-    # commandId: String!
+    phone: String
   }
   
   input SignInBody {
@@ -76,11 +76,21 @@ export const typeDefs = `#graphql
     name: String!
   }
   
+  enum RoleType {
+    admin
+    user
+  }
   type Profile {
     id: ID!
-    name: String
+    # name: String
+    firstName: String
+    lastName: String
+    phone: String
     email: String!
+    gender: GenderType
+    age: Int
     signUpDate: Date!
+    role: RoleType
   }
   
   type User {
@@ -236,6 +246,7 @@ enum OperationType {
     amount: Float!
     category: Category!
     type: String!
+    role: RoleType
   }
   
   union Operation = Profit | Cost
@@ -272,8 +283,17 @@ enum OperationType {
     newPassword: String!
   }
 
+  enum GenderType {
+    female
+    male
+    other
+  }
+
   input UpdateProfileInput {
-    name: String!
+    firstName: String!
+    lastName: String!
+    gender: GenderType!
+    age: Int!
   }
 
   type AuthResult {
@@ -289,7 +309,7 @@ enum OperationType {
   }
 
   type ProfileMutations {
-    signup(email: String!, password: String!, commandId: String!): AuthResult!
+    signup(email: String!, password: String!, phone: String): AuthResult!
     signin(email: String!, password: String!): AuthResult!
     update(input: UpdateProfileInput!): Profile!
     password: ProfilePasswordMutations

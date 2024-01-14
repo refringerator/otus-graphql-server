@@ -135,6 +135,12 @@ export type DateRange = {
   lte?: InputMaybe<Scalars['Date']['input']>;
 };
 
+export enum GenderType {
+  Female = 'female',
+  Male = 'male',
+  Other = 'other'
+}
+
 export type Mutation = {
   __typename?: 'Mutation';
   categories: CategoryMutations;
@@ -442,9 +448,14 @@ export type ProductsResponse = {
 
 export type Profile = {
   __typename?: 'Profile';
+  age?: Maybe<Scalars['Int']['output']>;
   email: Scalars['String']['output'];
+  firstName?: Maybe<Scalars['String']['output']>;
+  gender?: Maybe<GenderType>;
   id: Scalars['ID']['output'];
-  name?: Maybe<Scalars['String']['output']>;
+  lastName?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<RoleType>;
   signUpDate: Scalars['Date']['output'];
 };
 
@@ -464,9 +475,9 @@ export type ProfileMutationsSigninArgs = {
 
 
 export type ProfileMutationsSignupArgs = {
-  commandId: Scalars['String']['input'];
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
+  phone?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -492,6 +503,7 @@ export type Profit = {
   desc?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+  role?: Maybe<RoleType>;
   type: Scalars['String']['output'];
   updatedAt: Scalars['Date']['output'];
 };
@@ -517,6 +529,11 @@ export type ResponsePagination = {
   total: Scalars['Int']['output'];
 };
 
+export enum RoleType {
+  Admin = 'admin',
+  User = 'user'
+}
+
 export type SignInBody = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -525,6 +542,7 @@ export type SignInBody = {
 export type SignUpBody = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
+  phone?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum SortField {
@@ -560,7 +578,10 @@ export type UpdateProfileBody = {
 };
 
 export type UpdateProfileInput = {
-  name: Scalars['String']['input'];
+  age: Scalars['Int']['input'];
+  firstName: Scalars['String']['input'];
+  gender: GenderType;
+  lastName: Scalars['String']['input'];
 };
 
 export type User = {
