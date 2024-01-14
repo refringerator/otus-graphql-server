@@ -13,7 +13,7 @@ export const removeRaw: ApolloResolver<never, Category | Error, CategoryMutation
 ) => {
   const { id } = args;
   const { commandId } = (user || {}) as UserDocument;
-  const entity = await CategoryModel.findOneAndRemove({ _id: id, commandId });
+  const entity = await CategoryModel.findOneAndRemove({ _id: id });
 
   if (!entity) {
     return new GraphQLError(`Category with id: "${id}" not found`, {

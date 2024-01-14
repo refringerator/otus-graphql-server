@@ -11,7 +11,7 @@ export const update: (patch?: boolean) => ApolloResolver<never, Category | Error
   async (_, args, { user }) => {
     const { id, input } = args;
     const { commandId } = (user || {}) as UserDocument;
-    const entity = await CategoryModel.findOne({ _id: id, commandId });
+    const entity = await CategoryModel.findOne({ _id: id });
     if (!entity) {
       return new GraphQLError(`Category with id: "${id}" not found`, {
         extensions: {

@@ -10,13 +10,22 @@ export const update: (patch?: boolean) => ApolloResolver<never, Product | Error,
   (patch) =>
   async (_, args, { user }) => {
     const { id, input } = args;
-    const { commandId } = (user || {}) as UserDocument;
-    const entity = await ProductModel.findOne({ _id: id, commandId });
+    const { commandId, role } = (user || {}) as UserDocument;
+
+    if (role !== 'admin') {
+      return new GraphQLError(`Non admin user cant edit products`, {
+        extensions: {
+          code: ErrorCode.NOT_ALLOWED,
+        },
+      });
+    }
+
+    const entity = await ProductModel.findOne({ _id: id });
     if (!entity) {
       return new GraphQLError(`Product with id: "${id}" not found`, {
         extensions: {
           code: ErrorCode.NOT_FOUND,
-          http: { status: 404 },
+          // http: { status: 404 },
         },
       });
     }
@@ -29,7 +38,7 @@ export const update: (patch?: boolean) => ApolloResolver<never, Product | Error,
       return new GraphQLError(validationError.message, {
         extensions: {
           code: ErrorCode.VALIDATION,
-          http: { status: 400 },
+          // http: { status: 400 },
         },
       });
     }

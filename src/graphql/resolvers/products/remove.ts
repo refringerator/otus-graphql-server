@@ -13,7 +13,7 @@ export const removeRaw: ApolloResolver<never, Product | Error, ProductMutationsR
 ) => {
   const { id } = args;
   const { commandId } = (user || {}) as UserDocument;
-  const entity = await ProductModel.findOneAndRemove({ _id: id, commandId });
+  const entity = await ProductModel.findOneAndRemove({ _id: id });
 
   if (!entity) {
     return new GraphQLError(`Product with id: "${id}" not found`, {
