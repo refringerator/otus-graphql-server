@@ -12,7 +12,16 @@ export const removeRaw: ApolloResolver<never, Product | Error, ProductMutationsR
   { user }
 ) => {
   const { id } = args;
-  const { commandId } = (user || {}) as UserDocument;
+  const { role } = (user || {}) as UserDocument;
+
+  if (role !== 'admin') {
+    return new GraphQLError(`Non admin user cant delete products`, {
+      extensions: {
+        code: ErrorCode.NOT_ALLOWED,
+      },
+    });
+  }
+
   const entity = await ProductModel.findOneAndRemove({ _id: id });
 
   if (!entity) {
