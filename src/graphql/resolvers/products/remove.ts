@@ -28,7 +28,7 @@ export const removeRaw: ApolloResolver<never, Product | Error, ProductMutationsR
     return new GraphQLError(`Product with id: "${id}" not found`, {
       extensions: {
         code: ErrorCode.NOT_FOUND,
-        http: { status: 404 },
+        // http: { status: 404 },
       },
     });
   }
